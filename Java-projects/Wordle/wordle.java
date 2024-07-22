@@ -1,4 +1,5 @@
 import java.util.ArrayList; //We will store the words from words.txt in an array list
+import java.util.*; //need collections for randomization using shuffle 
 import java.io.File; //going to be reading words.txt so need this
 import java.io.FileNotFoundException; //Just incase someone deletes words.txt, I will try and catch it
 import java.util.Scanner; //Need this to read the words.txt file
@@ -12,10 +13,10 @@ public class wordle{
             Scanner readWords = new Scanner(wordFile);
             while (readWords.hasNextLine()){
                 String wordData = readWords.nextLine();
-                System.out.println(wordData);
                 String tempWord = new String();
                 for (int i = 0; i < wordData.length(); i++){
                     if (wordData.charAt(i) == ','){
+                        System.out.println(tempWord);
                         words.add(tempWord);
                         tempWord = "";
                     }
@@ -23,7 +24,8 @@ public class wordle{
                         tempWord += wordData.charAt(i);
                     }
                 }
-                words.add(wordData);
+                System.out.println(tempWord);
+                words.add(tempWord);
             }
             readWords.close();
         }
@@ -32,8 +34,18 @@ public class wordle{
         }
         return(words);
     }
+
+    public String chooseRandomWord(ArrayList<String> words){
+        String chosenWord = new String();
+        Collections.shuffle(words);
+        chosenWord = words.get(0);
+        return chosenWord;
+    }
+
     public static void main(String[] args){
         wordle game = new wordle();
-        game.getWords();
+        ArrayList<String> wordList = game.getWords();
+        String hiddenWord = game.chooseRandomWord(wordList);
+        System.out.println(hiddenWord);
     }
 }
