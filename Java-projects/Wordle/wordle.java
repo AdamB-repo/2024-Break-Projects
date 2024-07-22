@@ -42,8 +42,20 @@ public class wordle{
         return chosenWord; //return the random word
     }
 
-    public void displayGame(ArrayList<String> guesses){
-        for (int i = 0; i < guesses.size(); i++){
+    public ArrayList<String> makeBaseGuessesArray(String chosenWord){ //This hides the word with '-' characters then returns the base gameboard for the user
+        String hiddenWord = new String(); //will be used to hide the word
+        ArrayList<String> gameDisplay = new ArrayList<String>(); //will be used to keep the guesses so the player can use prior guesses for future refernce
+        for (int i = 0; i < chosenWord.length(); i++){ //loop to make a string to hide the word
+            hiddenWord += '-';
+        }
+        for (int i = 0; i < 6; i++){ //loop to add the newly hidden word to an array
+            gameDisplay.add(hiddenWord);
+        }
+        return gameDisplay;
+    }
+
+    public void displayGame(ArrayList<String> guesses){ //This will be used to allow the player to see the state of the game
+        for (int i = 0; i < guesses.size(); i++){ //for each guess the player can make, this sets up the a string to print
             String setupString = "Guess ";
             setupString += Integer.toString(i);
             setupString += ": ";
@@ -57,13 +69,7 @@ public class wordle{
         ArrayList<String> wordList = game.getWords();
         String hiddenWord = game.chooseRandomWord(wordList);
         System.out.println(hiddenWord);
-
-        //Remember to remove these
-        ArrayList<String> temp = new ArrayList<String>();
-        temp.add("hi");
-        temp.add("This");
-        temp.add("is");
-        temp.add("working");
-        game.displayGame(temp);
+        ArrayList<String> gameboard = game.makeBaseGuessesArray(hiddenWord);
+        game.displayGame(gameboard);
     }
 }
