@@ -42,10 +42,28 @@ public class wordle{
         return chosenWord; //return the random word
     }
 
+    public void displayGame(ArrayList<String> guesses){
+        for (int i = 0; i < guesses.size(); i++){
+            String setupString = "Guess ";
+            setupString += Integer.toString(i);
+            setupString += ": ";
+            setupString += guesses.get(i);
+            System.out.println(setupString);
+        }
+    }
+
     public static void main(String[] args){
         wordle game = new wordle();
         ArrayList<String> wordList = game.getWords();
         String hiddenWord = game.chooseRandomWord(wordList);
         System.out.println(hiddenWord);
+
+        //Remember to remove these
+        ArrayList<String> temp = new ArrayList<String>();
+        temp.add("hi");
+        temp.add("This");
+        temp.add("is");
+        temp.add("working");
+        game.displayGame(temp);
     }
 }
