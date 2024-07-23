@@ -122,6 +122,9 @@ public class wordle{
                 System.out.println("\n");
                 guess = game.updateCharacterColours(guess, hiddenWord); //use the previous method to make a string to give feedback to the player
                 game.updateGameboard(gameboard, guess, i); //update the board for later
+                if (i == 5){ //If this was the players last guess, tell them what the word was
+                    System.out.println(yellow + "Out of guesses, the word was '" + hiddenWord + "'" + resetColour); 
+                }
             }
         }
 
