@@ -63,9 +63,30 @@ public class wordle{
         return gameboard;
     }
 
-    public String updateCharacterColours(String guess){
-
-        return guess;
+    public String updateCharacterColours(String guess, String hiddenWord){
+        String finalGuess = new String();
+        for (int i = 0; i < guess.length(); i++){
+            if (hiddenWord.length() > i){
+                if (guess.charAt(i) == hiddenWord.charAt(i)){
+                    finalGuess += green + guess.charAt(i) + resetColour;
+                }
+                else if (hiddenWord.indexOf(guess.charAt(i)) != -1){
+                    finalGuess += yellow + guess.charAt(i) + resetColour;
+                }
+                else{
+                    finalGuess += guess.charAt(i);
+                }
+            }
+            else {
+                if (hiddenWord.indexOf(guess.charAt(i)) != -1){
+                    finalGuess += yellow + guess.charAt(i) + resetColour;
+                }
+                else{
+                    finalGuess += guess.charAt(i);
+                }
+            }
+        }
+        return finalGuess;
     }
 
     public void displayGame(ArrayList<String> guesses){ //This will be used to allow the player to see the state of the game
@@ -94,14 +115,15 @@ public class wordle{
             System.out.println("Please guess the word");
             String guess = gameScanner.nextLine();
             if (guess.equals(hiddenWord)){
-                System.out.println("Woop woop, the word was " + hiddenWord);
+                System.out.println("\n");
+                System.out.println("Woop woop, the word was '" + hiddenWord + "'");
                 guess = green + guess + resetColour;
                 game.updateGameboard(gameboard, guess, i);
                 break;
             }
             else{
                 System.out.println("\n");
-
+                guess = game.updateCharacterColours(guess, hiddenWord);
                 game.updateGameboard(gameboard, guess, i);
             }
         }
