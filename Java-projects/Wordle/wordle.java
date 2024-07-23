@@ -1,10 +1,14 @@
-import java.util.ArrayList; //We will store the words from words.txt in an array list
+//We will store the words from words.txt in an array list
+//Need this to read the words.txt file
 import java.util.*; //need collections for randomization using shuffle 
 import java.io.File; //going to be reading words.txt so need this
 import java.io.FileNotFoundException; //Just incase someone deletes words.txt, I will try and catch it
-import java.util.Scanner; //Need this to read the words.txt file
 
 public class wordle{
+
+    public static final String resetColour = "\u001B[0m";
+    public static final String yellow = "\u001B[33m";
+    public static final String green = "\u001B[32m";
 
     public ArrayList<String> getWords(){ //This method reads words.txt and extracts each of the words between the commas
         ArrayList<String> words = new ArrayList<String>(); //make the array for the words in words.txt
@@ -54,6 +58,16 @@ public class wordle{
         return gameDisplay;
     }
 
+    public ArrayList<String> updateGameboard(ArrayList<String> gameboard, String guess, int index){
+        gameboard.set(index, guess);
+        return gameboard;
+    }
+
+    public String updateCharacterColours(String guess){
+
+        return guess;
+    }
+
     public void displayGame(ArrayList<String> guesses){ //This will be used to allow the player to see the state of the game
         for (int i = 0; i < guesses.size(); i++){ //for each guess the player can make, this sets up the a string to print
             String setupString = "Guess ";
@@ -70,6 +84,29 @@ public class wordle{
         String hiddenWord = game.chooseRandomWord(wordList);
         System.out.println(hiddenWord);
         ArrayList<String> gameboard = game.makeBaseGuessesArray(hiddenWord);
+
+        System.out.println("Hi, welcome to Wordle");
+
+        Scanner gameScanner = new Scanner(System.in);
+
+        for (int i = 0; i < 6; i++){
+            game.displayGame(gameboard);
+            System.out.println("Please guess the word");
+            String guess = gameScanner.nextLine();
+            if (guess.equals(hiddenWord)){
+                System.out.println("Woop woop, the word was " + hiddenWord);
+                guess = green + guess + resetColour;
+                game.updateGameboard(gameboard, guess, i);
+                break;
+            }
+            else{
+                System.out.println("\n");
+
+                game.updateGameboard(gameboard, guess, i);
+            }
+        }
+
+        gameScanner.close();
         game.displayGame(gameboard);
     }
 }
