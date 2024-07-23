@@ -20,7 +20,6 @@ public class wordle{
                 String tempWord = new String(); //This will be used in the following code that will read from the lines extracted
                 for (int i = 0; i < wordData.length(); i++){ //Add characters to tempWord from the lines until a comma is seen, then add the tempWord to the array and empty tempWord
                     if (wordData.charAt(i) == ','){
-                        System.out.println(tempWord);
                         words.add(tempWord);
                         tempWord = "";
                     }
@@ -28,7 +27,6 @@ public class wordle{
                         tempWord += wordData.charAt(i);
                     }
                 }
-                System.out.println(tempWord); 
                 words.add(tempWord); //need to add the final word as it won't have a comma after it
             }
             readWords.close();
@@ -103,7 +101,6 @@ public class wordle{
         wordle game = new wordle();
         ArrayList<String> wordList = game.getWords();
         String hiddenWord = game.chooseRandomWord(wordList);
-        System.out.println(hiddenWord);
         ArrayList<String> gameboard = game.makeBaseGuessesArray(hiddenWord);
 
         System.out.println("Hi, welcome to Wordle");
@@ -116,7 +113,7 @@ public class wordle{
             String guess = gameScanner.nextLine();
             if (guess.equals(hiddenWord)){
                 System.out.println("\n");
-                System.out.println("Woop woop, the word was '" + hiddenWord + "'");
+                System.out.println(green + "Woop woop, the word was '" + hiddenWord + "'" + resetColour);
                 guess = green + guess + resetColour;
                 game.updateGameboard(gameboard, guess, i);
                 break;
