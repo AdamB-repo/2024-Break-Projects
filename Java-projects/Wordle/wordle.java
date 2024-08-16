@@ -13,7 +13,10 @@ public class wordle{
     public ArrayList<String> getWords(){ //This method reads words.txt and extracts each of the words between the commas
         ArrayList<String> words = new ArrayList<String>(); //make the array for the words in words.txt
         try {
-            File wordFile = new File("C:/Users/ajbro/OneDrive/Documents/2024-Break-Projects/Java-projects/Wordle/words.txt"); //This will work for me but you will need to specify your path to "words.txt"
+            File wordFile = new File("words.txt"); //The following three lines will find the words.txt file. For it to work, the user must be running the program from the wordle folder or getAbsolutePath will return the wrong path
+            String absolute = wordFile.getAbsolutePath();
+            wordFile = new File(absolute);
+
             Scanner readWords = new Scanner(wordFile); 
             while (readWords.hasNextLine()){
                 String wordData = readWords.nextLine(); //get the line from the word file
