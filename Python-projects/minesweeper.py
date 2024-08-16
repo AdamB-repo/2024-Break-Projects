@@ -75,51 +75,64 @@ class minesweeper:
                 self.gameboard[random_height_for_mine][random_width_for_mine] = "x" #change the spot to an x representing a mine
                 #The following lines adds 1 to all adjacent tiles to indicate an additional mine being within 1 tile
                 #There are lots of edge cases that need to be checked hence the amount of "if" statements
+                
+                #Deals with spawning mine in the center of the board
                 if (not random_height_for_mine == 0) and (random_height_for_mine != (self.height - 1)) and (not random_width_for_mine == 0) and (random_width_for_mine != (self.width - 1)):
                     for i in range (-1, 2):
                         for j in range (-1, 2):
                             if self.gameboard[random_height_for_mine + j][random_width_for_mine + i] != "x":
                                 self.gameboard[random_height_for_mine + j][random_width_for_mine + i] = str(int(self.gameboard[random_height_for_mine + j][random_width_for_mine + i]) + 1)
+                
+                #Deals with spawning mine at the top middle of the board
                 elif (random_height_for_mine == 0) and ((not random_width_for_mine == 0) and (not random_width_for_mine == self.width - 1)):
                     for i in range (-1, 2):
                         for j in range (0, 2):
                             if self.gameboard[random_height_for_mine + j][random_width_for_mine + i] != "x":
                                 self.gameboard[random_height_for_mine + j][random_width_for_mine + i] = str(int(self.gameboard[random_height_for_mine + j][random_width_for_mine + i]) + 1)     
+                
+                #Deals with spawning mine at the bottom middle of the board
                 elif (random_height_for_mine == (self.height - 1)) and ((not random_width_for_mine == 0) and (not random_width_for_mine == self.width - 1)):
                     for i in range (-1, 2):
                         for j in range (-1, 1):
                             if self.gameboard[random_height_for_mine + j][random_width_for_mine + i] != "x":
                                 self.gameboard[random_height_for_mine + j][random_width_for_mine + i] = str(int(self.gameboard[random_height_for_mine + j][random_width_for_mine + i]) + 1)
+                
+                #Deals with spawning mine on the left middle of the board
                 elif (random_width_for_mine == 0) and ((not random_height_for_mine == 0) and (not random_height_for_mine == self.height - 1)):
                     for i in range (0, 2):
                         for j in range (-1, 2):
                             if self.gameboard[random_height_for_mine + j][random_width_for_mine + i] != "x":
                                 self.gameboard[random_height_for_mine + j][random_width_for_mine + i] = str(int(self.gameboard[random_height_for_mine + j][random_width_for_mine + i]) + 1)
-                elif (random_width_for_mine == 0) and ((not random_height_for_mine == 0) and (not random_height_for_mine == self.height - 1)):
-                    for i in range (0, 2):
-                        for j in range (-1, 2):
-                            if self.gameboard[random_height_for_mine + j][random_width_for_mine + i] != "x":
-                                self.gameboard[random_height_for_mine + j][random_width_for_mine + i] = str(int(self.gameboard[random_height_for_mine + j][random_width_for_mine + i]) + 1)
+                
+                #Deals with spawning mine on the right middle of the board
                 elif (random_width_for_mine == (self.width - 1)) and ((not random_height_for_mine == 0) and (not random_height_for_mine == self.height - 1)):
                     for i in range (-1, 1):
                         for j in range (-1, 2):
                             if self.gameboard[random_height_for_mine + j][random_width_for_mine + i] != "x":
                                 self.gameboard[random_height_for_mine + j][random_width_for_mine + i] = str(int(self.gameboard[random_height_for_mine + j][random_width_for_mine + i]) + 1)
+                
+                #Deals with spawing mine in the top left corner of the board
                 elif (random_width_for_mine == 0) and (random_height_for_mine == 0):
                     for i in range (0, 2):
                         for j in range (0, 2):
                             if self.gameboard[random_height_for_mine + j][random_width_for_mine + i] != "x":
                                 self.gameboard[random_height_for_mine + j][random_width_for_mine + i] = str(int(self.gameboard[random_height_for_mine + j][random_width_for_mine + i]) + 1)
+                
+                #Deals with spawning mine in the top right corner of the board
                 elif (random_width_for_mine == (self.width - 1)) and (random_height_for_mine == 0):
                     for i in range (-1, 1):
                         for j in range (0, 2):
                             if self.gameboard[random_height_for_mine + j][random_width_for_mine + i] != "x":
                                 self.gameboard[random_height_for_mine + j][random_width_for_mine + i] = str(int(self.gameboard[random_height_for_mine + j][random_width_for_mine + i]) + 1)
+                
+                #Deals with spawning mine in the bottom left corner of the board
                 elif (random_width_for_mine == 0) and (random_height_for_mine == (self.height - 1)):
                     for i in range (0, 2):
                         for j in range (-1, 1):
                             if self.gameboard[random_height_for_mine + j][random_width_for_mine + i] != "x":
                                 self.gameboard[random_height_for_mine + j][random_width_for_mine + i] = str(int(self.gameboard[random_height_for_mine + j][random_width_for_mine + i]) + 1)
+                
+                #Deals with spawning mine in the bottome right corner of the board
                 elif (random_width_for_mine == (self.width - 1)) and (random_height_for_mine == (self.height - 1)):
                     for i in range (-1, 1):
                         for j in range (-1, 1):
